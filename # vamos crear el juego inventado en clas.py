@@ -5,11 +5,11 @@ import time
 def animacionPar():
     #doble barra \ para que Python imprima una sola \
     frames = [
-        "🏃‍♂️ o         🏃‍♂️",
-        "🏃‍♂️   o       🏃‍♂️",
-        "🏃‍♂️     o     🏃‍♂️",
-        "🏃‍♂️       o   🏃‍♂️",
-        "🏃‍♂️         o 🏃‍♂️"
+        "✊🏐        ✊",
+        "✊  🏐      ✊",
+        "✊    🏐    ✊",
+        "✊      🏐  ✊",
+        "✊        🏐✊"
     ]
     for frame in frames:
         # \r sobrescribe la línea actual en la consola
@@ -23,11 +23,11 @@ def animacionPar():
 def animacionImpar():
     #doble barra \ para que Python imprima una sola \
     frames = [
-        "🏃‍♂️          o🏃‍♂️",
-        "🏃‍♂️        o  🏃‍♂️",
-        "🏃‍♂️      o    🏃‍♂️",
-        "🏃‍♂️    o      🏃‍♂️",
-        "🏃‍♂️  o        🏃‍♂️"
+        "✊        🏐✊",
+        "✊      🏐  ✊",
+        "✊    🏐    ✊",
+        "✊  🏐      ✊",
+        "✊🏐        ✊"
     ]
     for frame in frames:
         # \r sobrescribe la línea actual en la consola
@@ -41,28 +41,34 @@ def animacionImpar():
 
 
 def juegoDeOperaciones():
+    # Pedimos los datos al usuario antes de iniciar el bucle
+    totalJugadores = int(input("Ingrese cantidad de jugadores: "))
+    puntajeLimite = int(input("puntaje maximo: "))
     
-    posJugador = 0
+    print("\n----- ¡Empieza el juego! -----\n")
+
+    turno = 0
     valor = 0
-    puntaje = 12
 
-    while valor <= puntaje:
-        if posJugador % 2 == 0:
-            
-          #  print(f"jugador {posJugador}, {animacionPar()}, {valor} ")
+    while valor <= puntajeLimite:
+        # El operador % permite ciclar entre 1 y el total de jugadores
+        num_jugador = (turno % totalJugadores) + 1
 
-            valor = valor + 2
-            
-            print(f"jugador {posJugador}, {animacionPar()}, puntajes {valor} ")
+        # Evaluamos si el número del jugador es Par o Impar
+        if num_jugador % 2 == 0:
+            animacionPar()
+            operacion = "+2"
+            valor += 2
+        else:
+            animacionImpar()
+            operacion = "-1"
+            valor -= 1
 
+        print(f"Turno {turno + 1} | Jugador {num_jugador} | Operación: {operacion} | Puntaje acumulado: {valor}\n")
 
-        elif posJugador % 2 == 1:
-            valor = valor - 1
+        turno += 1
 
-            #animacionImpar()
+    print(f"🎉 ¡Juego terminado! Se alcanzó o superó el límite de {puntajeLimite} puntos.")
 
-           
-
-        posJugador = posJugador + 1
-
+# Ejecutar el juego
 juegoDeOperaciones()
