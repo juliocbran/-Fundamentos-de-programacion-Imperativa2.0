@@ -1,0 +1,8 @@
+def sumarLnumeros (numero):
+    if numero < 10:
+        return numero
+    else:
+        return (numero % 10) + sumarLnumeros (numero//10)
+    
+print (sumarLnumeros (1998))
+        
