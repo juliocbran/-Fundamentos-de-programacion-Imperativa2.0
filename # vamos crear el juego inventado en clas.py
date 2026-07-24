@@ -1,68 +1,80 @@
 # vamos crear el juego inventado en clase
-import sys 
+import sys
 import time
 
-def animacionPar():
-    #doble barra \ para que Python imprima una sola \
+
+def animacion_par():
     frames = [
-        "🏃‍♂️ o         🏃‍♂️",
-        "🏃‍♂️   o       🏃‍♂️",
-        "🏃‍♂️     o     🏃‍♂️",
-        "🏃‍♂️       o   🏃‍♂️",
-        "🏃‍♂️         o 🏃‍♂️"
+        "o         ",
+        " o        ",
+        "  o       ",
+        "   o      ",
+        "    o     ",
+        "     o    ",
+        "      o   ",
+        "       o  ",
+        "        o ",
+        "         o"
     ]
     for frame in frames:
-        # \r sobrescribe la línea actual en la consola
         sys.stdout.write('\r' + frame)
-        sys.stdout.flush() # Fuerza a la consola a dibujar inmediatamente
-        time.sleep(0.2)    # Pausa de 0.2 segundos por fotograma
+        sys.stdout.flush()
+        time.sleep(0.1)
+    print()
 
-    print() # Un salto de línea al final para que el siguiente texto no se pegue
 
-
-def animacionImpar():
-    #doble barra \ para que Python imprima una sola \
+def animacion_impar():
     frames = [
-        "🏃‍♂️          o🏃‍♂️",
-        "🏃‍♂️        o  🏃‍♂️",
-        "🏃‍♂️      o    🏃‍♂️",
-        "🏃‍♂️    o      🏃‍♂️",
-        "🏃‍♂️  o        🏃‍♂️"
+        "         o",
+        "        o ",
+        "       o  ",
+        "      o   ",
+        "     o    ",
+        "    o     ",
+        "   o      ",
+        "  o       ",
+        " o        ",
+        "o         "
     ]
     for frame in frames:
-        # \r sobrescribe la línea actual en la consola
         sys.stdout.write('\r' + frame)
-        sys.stdout.flush() # Fuerza a la consola a dibujar inmediatamente
-        time.sleep(0.2)    # Pausa de 0.2 segundos por fotograma
-
-    print() # Un salto de línea al final para que el siguiente texto no se pegue
-
+        sys.stdout.flush()
+        time.sleep(0.1)
+    print()
 
 
+def juego_de_operaciones():
+    while True:
+        try:
+            cantidad_jugadores = int(input("Ingrese la cantidad de jugadores: "))
+            if cantidad_jugadores <= 0:
+                print("La cantidad de jugadores debe ser un numero entero positivo.")
+                continue
+            break
+        except ValueError:
+            print("Por favor, ingrese un numero valido.")
 
-def juegoDeOperaciones():
-    
-    posJugador = 0
-    valor = 0
-    puntaje = 12
+    resultado = 0
 
-    while valor <= puntaje:
-        if posJugador % 2 == 0:
-            
-          #  print(f"jugador {posJugador}, {animacionPar()}, {valor} ")
+    print(f"\nIniciando el juego con {cantidad_jugadores} jugadores...\n")
 
-            valor = valor + 2
-            
-            print(f"jugador {posJugador}, {animacionPar()}, puntajes {valor} ")
+    for posicion in range(1, cantidad_jugadores + 1):
+        if posicion % 2 == 1:
+            resultado -= 1
+            print(f"Jugador {posicion} (posicion impar): se resta 1 -> resultado = {resultado}")
+            animacion_impar()
+        else:
+            resultado += 2
+            print(f"Jugador {posicion} (posicion par): se suma 2 -> resultado = {resultado}")
+            animacion_par()
+
+    print(f"\nResultado final despues de {cantidad_jugadores} jugadores: {resultado}")
+
+    if resultado <= cantidad_jugadores:
+        print("El juego termina porque el resultado es menor o igual a la cantidad de jugadores.")
+    else:
+        print("El juego termino, pero el resultado es mayor que la cantidad de jugadores.")
 
 
-        elif posJugador % 2 == 1:
-            valor = valor - 1
-
-            #animacionImpar()
-
-           
-
-        posJugador = posJugador + 1
-
-juegoDeOperaciones()
+if __name__ == "__main__":
+    juego_de_operaciones()
